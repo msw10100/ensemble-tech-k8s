@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: postgres
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://charts.bitnami.com/bitnami
+    chart: postgresql
+    targetRevision: 14.3.3
+    helm:
+      releaseName: postgres
+      values: |
+        auth:
+          postgresPassword: "strongpassword"
+        persistence:
+          enabled: true
+          storageClass: "standard-rwo" # This should match a StorageClass provided by the GCP CSI Driver
+          size: 8Gi
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: postgres
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
