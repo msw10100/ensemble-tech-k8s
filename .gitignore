@@ -1,0 +1,8 @@
+# Binaries
+*.tar.gz
+
+# Local configs
+.claude/
+.idea/
+.vscode/
+*.local.json
