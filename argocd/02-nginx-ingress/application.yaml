@@ -1,0 +1,51 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-ingress
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://kubernetes.github.io/ingress-nginx
+    chart: ingress-nginx
+    targetRevision: 4.12.0
+    helm:
+      releaseName: nginx-ingress
+      values: |
+        controller:
+          service:
+            type: LoadBalancer
+            annotations:
+              # GCP specific annotations for external load balancer
+              cloud.google.com/load-balancer-type: "External"
+          # Enable real IP forwarding
+          config:
+            use-forwarded-headers: "true"
+            compute-full-forwarded-for: "true"
+            use-proxy-protocol: "false"
+            proxy-real-ip-cidr: "0.0.0.0/0"
+          # Resource limits for single node
+          resources:
+            requests:
+              cpu: 100m
+              memory: 90Mi
+            limits:
+              cpu: 200m
+              memory: 200Mi
+          # Allow large file uploads
+          extraArgs:
+            default-ssl-certificate: "default/wildcard-ensembletechnologies-xyz"
+        # Disable default backend to save resources
+        defaultBackend:
+          enabled: false
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: ingress-nginx
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

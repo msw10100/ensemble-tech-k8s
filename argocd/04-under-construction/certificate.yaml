@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: wildcard-ensembletechnologies-xyz
+  namespace: default
+spec:
+  secretName: wildcard-ensembletechnologies-xyz
+  issuerRef:
+    name: letsencrypt-staging
+    kind: ClusterIssuer
+  dnsNames:
+  - "ensembletechnologies.xyz"
+  - "*.ensembletechnologies.xyz"

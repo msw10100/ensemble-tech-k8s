@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: under-construction
+  namespace: default
+  labels:
+    app: under-construction
+spec:
+  selector:
+    app: under-construction
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+  type: ClusterIP
