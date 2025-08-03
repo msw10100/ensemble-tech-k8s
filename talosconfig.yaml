@@ -1,8 +1,0 @@
-context: witson
-contexts:
-    witson:
-        endpoints:
-            - https://witson.omni.siderolabs.io
-        auth:
-            siderov1:
-                identity: mswatson@gmail.com

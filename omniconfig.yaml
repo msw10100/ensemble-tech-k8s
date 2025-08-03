@@ -1,7 +1,0 @@
-contexts:
-    default:
-        url: https://witson.omni.siderolabs.io
-        auth:
-            siderov1:
-                identity: mswatson@gmail.com
-context: default

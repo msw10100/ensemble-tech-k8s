@@ -11,6 +11,32 @@ spec:
     targetRevision: 4.10.0
     helm:
       releaseName: ingress-nginx
+      values: |
+        controller:
+          service:
+            type: LoadBalancer
+            annotations:
+              metallb.universe.tf/loadBalancer-class: metallb
+            loadBalancerClass: metallb
+          # Enable real IP forwarding
+          config:
+            use-forwarded-headers: "true"
+            compute-full-forwarded-for: "true"
+            use-proxy-protocol: "false"
+          # Allow large file uploads for package repositories
+          extraArgs:
+            default-ssl-certificate: "ingress-nginx/default-ssl-certificate"
+          # Resource limits
+          resources:
+            requests:
+              cpu: 100m
+              memory: 90Mi
+            limits:
+              cpu: 200m
+              memory: 200Mi
+        # Disable default backend if not needed
+        defaultBackend:
+          enabled: false
   destination:
     server: https://kubernetes.default.svc
     namespace: ingress-nginx

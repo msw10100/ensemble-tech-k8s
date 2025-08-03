@@ -1,0 +1,15 @@
+# Talos Machine Configuration Template for Omni
+# Copy this file to machine-config.yaml and update the join token
+
+apiVersion: v1alpha1
+kind: SideroLinkConfig
+apiUrl: "https://witson.siderolink.omni.siderolabs.io?jointoken=YOUR_JOIN_TOKEN_HERE"
+---
+apiVersion: v1alpha1
+kind: EventSinkConfig
+endpoint: "[fdae:41e4:649b:9303::1]:8090"
+---
+apiVersion: v1alpha1
+kind: KmsgLogConfig
+name: omni-kmsg
+url: "tcp://[fdae:41e4:649b:9303::1]:8092"
