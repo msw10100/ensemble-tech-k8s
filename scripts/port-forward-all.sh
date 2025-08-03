@@ -11,6 +11,8 @@ echo "  PostgreSQL: localhost:5432 (postgres/strongpassword)"
 echo "  Redis: localhost:6379"
 echo "  RabbitMQ AMQP: localhost:5672 (rabbitmq/strongpassword)"
 echo "  RabbitMQ Management: http://localhost:15672 (rabbitmq/strongpassword)"
+echo "  MinIO S3 API: localhost:9000 (minio/strongpassword)"
+echo "  MinIO Console: http://localhost:9001 (minio/strongpassword)"
 echo ""
 echo "Press Ctrl+C to stop all port forwarding"
 echo ""
@@ -30,6 +32,7 @@ trap cleanup SIGINT SIGTERM
 kubectl port-forward -n postgres svc/postgresql 5432:5432 &
 kubectl port-forward -n redis svc/redis 6379:6379 &
 kubectl port-forward -n rabbitmq svc/rabbitmq 5672:5672 15672:15672 &
+kubectl port-forward -n minio svc/minio 9000:9000 9001:9001 &
 
 # Wait for all background jobs
 wait

@@ -14,7 +14,7 @@ echo "  Username: rabbitmq"
 echo "  Password: strongpassword"
 echo ""
 echo "Example AMQP connection: amqp://rabbitmq:strongpassword@localhost:5672/"
-echo "Management UI: Open http://localhost:15672 in your browser"
+echo "Management UI: Open http://localhost:15672 in your browser and login with rabbitmq/strongpassword"
 echo ""
 echo "Press Ctrl+C to stop port forwarding"
 
