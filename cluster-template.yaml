@@ -1,0 +1,13 @@
+kind: Cluster
+name: talos-ipv6-cluster
+kubernetes:
+  version: v1.32.3
+talos:
+  version: v1.10.1
+---
+kind: ControlPlane
+machines:
+  - b67ccb42-f0ba-175c-fe74-696a757ca105
+---
+kind: Machine
+name: b67ccb42-f0ba-175c-fe74-696a757ca105
